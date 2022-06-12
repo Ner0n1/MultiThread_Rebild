@@ -1,0 +1,18 @@
+//---------------------------------------------------------------------------
+
+#ifndef Unit2H
+#define Unit2H
+//---------------------------------------------------------------------------
+#include <System.Classes.hpp>
+//---------------------------------------------------------------------------
+class Read_T : public TThread
+{
+private:
+protected:
+	void __fastcall Execute();
+    void __fastcall Error();
+public:
+	__fastcall Read_T(bool CreateSuspended);
+};
+//---------------------------------------------------------------------------
+#endif
