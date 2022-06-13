@@ -6,6 +6,7 @@
 #include "Unit1.h"
 #include "Unit2.h"
 #include "Unit3.h"
+#include <stdio.h>
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 
@@ -21,7 +22,7 @@
 //        Form1->Caption = "Updated in a thread";
 //      }
 //---------------------------------------------------------------------------
-const WCHAR *name = L"\\\\.\\C:";
+//const WCHAR *name = L"\\\\.\\C:";
 DWORD block_size;
 
 void __fastcall Read_T::SizeError()
@@ -58,15 +59,17 @@ __fastcall Read_T::Read_T(wchar_t *disk,bool CreateSuspended)
 		Synchronize(&SizeError);
 		return;
 	}
-	name = disk;
-	Application->MessageBox(name,L"Message", MB_OK);
+	name = (Form1 -> Edit2 -> Text).c_str();
 	FreeOnTerminate = true;
 	Event = new TEvent(NULL, true, false, "", false);
 }
 //---------------------------------------------------------------------------
 void __fastcall Read_T::Execute()
 {
-	HANDLE Handle = CreateFileW(name, GENERIC_READ,	FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL);
+	HANDLE Handle = CreateFileW(L"\\\\.\\C:", GENERIC_READ,
+	FILE_SHARE_READ | FILE_SHARE_WRITE,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,
+	NULL);
+	Application->MessageBox(name,L"Message", MB_OK);
 	if (Handle == INVALID_HANDLE_VALUE)
 	{
 	   Synchronize(&DiskError);
