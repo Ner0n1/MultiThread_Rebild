@@ -69,7 +69,6 @@ void __fastcall Read_T::Execute()
 	HANDLE Handle = CreateFileW(L"\\\\.\\C:", GENERIC_READ,
 	FILE_SHARE_READ | FILE_SHARE_WRITE,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,
 	NULL);
-	Application->MessageBox(name,L"Message", MB_OK);
 	if (Handle == INVALID_HANDLE_VALUE)
 	{
 	   Synchronize(&DiskError);
